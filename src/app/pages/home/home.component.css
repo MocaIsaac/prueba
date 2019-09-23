@@ -1,0 +1,12 @@
+.imgPayment {
+    max-width: 350px;
+    align-content: center;
+}
+
+.center {
+    text-align: center !important;
+}
+
+.border75 {
+    border-radius: 75px !important;
+}

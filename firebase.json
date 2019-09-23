@@ -1,0 +1,10 @@
+{
+    "hosting": {
+        "public": "dist/envia",
+        "ignore": [
+            "firebase.json",
+            "**/.*",
+            "**/node_modules/**"
+        ]
+    }
+}

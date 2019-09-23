@@ -1,0 +1,104 @@
+<div class="container">
+    <div class="row">
+        <div class="col col-md-12 mt20">
+            <label><b>Número de orden: </b> {{order}}</label>
+        </div>
+    </div>
+    <div class="row justify-content-md-center mt15">
+        <div class="col col-md-12">
+            <div class="card">
+                <table class="table">
+                    <thead class="thead-light">
+                        <tr>
+                            <th scope="col">SKU</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Cantidad</th>
+                            <th scope="col">Precio</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of productList">
+                            <th scope="row">{{item.sku}}</th>
+                            <td>{{item.name}}</td>
+                            <td>{{item.quantity}}</td>
+                            <td>{{item.price | currency}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-md-end mt10">
+        <div class="col-md-3">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Agregar producto</button>
+            <button type="button" class="btn btn-success ml5" data-toggle="modal" data-target="#payment">Pagar</button>
+        </div>
+    </div>
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+        <form [formGroup]="productForm" novalidate>
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Agregar producto</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label><b>SKU:</b></label>
+                            <input class="form-control" formControlName="sku" type="number">
+                        </div>
+                        <div *ngIf="productForm.controls['sku'].invalid && (productForm.controls['sku'].dirty || productForm.controls['sku'].touched)" class="alert alert-danger">
+                            <div *ngIf="productForm.controls['sku'].errors.required">
+                                SKU es requerido
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label><b>Nombre:</b></label>
+                            <input class="form-control" formControlName="name" type="text">
+                        </div>
+                        <div *ngIf="productForm.controls['name'].invalid && (productForm.controls['name'].dirty || productForm.controls['name'].touched)" class="alert alert-danger">
+                            <div *ngIf="productForm.controls['name'].errors.required">
+                                Nombre es requerido
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label><b>Cantidad:</b></label>
+                            <input class="form-control" formControlName="quantity" type="number">
+                        </div>
+                        <div *ngIf="productForm.controls['quantity'].invalid && (productForm.controls['quantity'].dirty || productForm.controls['quantity'].touched)" class="alert alert-danger">
+                            <div *ngIf="productForm.controls['quantity'].errors.required">
+                                Cantidad es requerido
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label><b>Precio:</b></label>
+                            <input class="form-control" formControlName="price" type="number">
+                        </div>
+                        <div *ngIf="productForm.controls['price'].invalid && (productForm.controls['price'].dirty || productForm.controls['price'].touched)" class="alert alert-danger">
+                            <div *ngIf="productForm.controls['price'].errors.required">
+                                Precio es requerido
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        <button type="submit" [disabled]="productForm.pristine || productForm.invalid" data-dismiss="modal" (click)="addData(productForm.value)" class="btn btn-primary">Guardar</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal fade" id="payment" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content center border75">
+                <div class="modal-body">
+                    <h1>¡Pago exitoso!</h1>
+                    <img [src]="pathIMG" class="imgPayment">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
